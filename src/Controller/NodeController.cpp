@@ -7,12 +7,18 @@
 
 #include "NodeController.h"
 
-NodeController::NodeController() {
+NodeController::NodeController()
+{
 	// TODO Auto-generated constructor stub
 
 }
 
-NodeController::~NodeController() {
+NodeController::~NodeController()
+{
 	// TODO Auto-generated destructor stub
 }
 
+void NodeController::start()
+{
+
+}
