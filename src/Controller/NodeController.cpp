@@ -6,11 +6,13 @@
  */
 
 #include "NodeController.h"
+#include <iostream>
+using namespace std;
 
 NodeController::NodeController()
 {
-	// TODO Auto-generated constructor stub
-
+	stringNode.setValue("salad");
+	intNode.setValue(999);
 }
 
 NodeController::~NodeController()
