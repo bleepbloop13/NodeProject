@@ -8,7 +8,8 @@
 #include "Node.h"
 
 template <class Type>
-Node<Type>::Node() {
+Node<Type>::Node()
+{
 	this->pointers = nullptr;
 }
 
@@ -20,7 +21,8 @@ Node<Type>::Node(Type value)
 }
 
 template <class Type>
-Node<Type>::~Node() {
+Node<Type>::~Node()
+{
 	// TODO Auto-generated destructor stub
 
 }
