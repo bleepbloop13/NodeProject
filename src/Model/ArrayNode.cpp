@@ -14,7 +14,8 @@ ArrayNode<Type>::ArrayNode() : Node<Type>()
 }
 
 template <class Type>
-ArrayNode<Type>::~ArrayNode() {
+ArrayNode<Type>::~ArrayNode()
+{
 	// TODO Auto-generated destructor stub
 }
 
