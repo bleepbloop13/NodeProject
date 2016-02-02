@@ -7,12 +7,15 @@
 
 #include "CTECArray.h"
 
-CTECArray::CTECArray() {
-	// TODO Auto-generated constructor stub
-
+template <class Type>
+CTECArray<Type>::CTECArray(int size)
+{
+	this->size = size;
 }
 
-CTECArray::~CTECArray() {
+template <class Type>
+CTECArray<Type>::~CTECArray()
+{
 	// TODO Auto-generated destructor stub
 }
 
