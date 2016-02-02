@@ -14,7 +14,7 @@ template <class Type>
 class CTECArray {
 private:
 	int size;
-	ArrayNode<Type> * Head;
+	ArrayNode<Type> * head;
 public:
 	CTECArray(int size);
 	virtual ~CTECArray();
