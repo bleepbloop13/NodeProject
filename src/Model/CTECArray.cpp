@@ -16,12 +16,27 @@ CTECArray<Type>::CTECArray(int size)
 	this->head = nullptr;
 
 	//Defensive
-	if(size <= 0)
+	if (size <= 0)
 	{
 		cerr << "That is not a valid number ya idjit" << endl;
 		return;
 	}
-}
+
+	for (int index = 0; index < size; index++)
+		if (head != nullptr)
+		{
+			//Regular nodes are being made
+			ArrayNode<Type> nextNode;
+			nextNode.setNext(head);
+			this->head = &nextNode;
+		}
+		else
+		{
+			//the first ArrayNode is made;
+			ArrayNode<Type> firstNode;
+			this->head = &firstNode;
+		}
+	}
 
 template<class Type>
 int CTECArray<Type>::getSize()
@@ -39,9 +54,9 @@ void CTECArray<Type>::set(int position, Type value)
 	else
 	{
 		ArrayNode<Type> * current = head;
-		for(int spot = 0; spot <= position; spot++)
+		for (int spot = 0; spot <= position; spot++)
 		{
-			if(spot != position)
+			if (spot != position)
 			{
 				current = current->getNext();
 			}
@@ -81,6 +96,17 @@ Type* CTECArray<Type>::get(int position)
 template<class Type>
 CTECArray<Type>::~CTECArray()
 {
-	// TODO Auto-generated destructor stub
+	ArrayNode<Type> * deleteMe = head;
+	for (int index = 0; index < size; index++)
+	{
+		if (deleteMe->getNext() != nullptr)
+		{
+			head = deleteMe->getNext();
+			deleteMe->setNext(nullptr);
+		}
+		delete deleteMe;
+		deleteMe = head;
+	}
+	delete head;
 }
 
