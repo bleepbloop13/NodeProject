@@ -9,6 +9,9 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * Constructor for the class. Assigns pointers and creates array.
+ */
 template<class Type>
 CTECArray<Type>::CTECArray(int size)
 {
@@ -23,6 +26,8 @@ CTECArray<Type>::CTECArray(int size)
 	}
 
 	for (int index = 0; index < size; index++)
+	{
+
 		if (head != nullptr)
 		{
 			//Regular nodes are being made
@@ -37,13 +42,19 @@ CTECArray<Type>::CTECArray(int size)
 			this->head = &firstNode;
 		}
 	}
-
+}
+/**
+ * Returns the size pointer for the array.
+ */
 template<class Type>
 int CTECArray<Type>::getSize()
 {
 	return this->size;
 }
 
+/**
+ * Sets the value to a specific position. If/else tests if input is out of bounds.
+ */
 template<class Type>
 void CTECArray<Type>::set(int position, Type value)
 {
@@ -68,6 +79,9 @@ void CTECArray<Type>::set(int position, Type value)
 	}
 }
 
+/**
+ * Gets the value at a specific position. If/else tests if position is out of bounds.
+ */
 template<class Type>
 Type* CTECArray<Type>::get(int position)
 {
@@ -93,6 +107,9 @@ Type* CTECArray<Type>::get(int position)
 	}
 }
 
+/**
+ * Deconstructs all pointers.
+ */
 template<class Type>
 CTECArray<Type>::~CTECArray()
 {
