@@ -7,6 +7,7 @@
 
 #include "CTECArray.h"
 #include <iostream>
+#include <assert.h>
 using namespace std;
 
 /**
@@ -19,27 +20,21 @@ CTECArray<Type>::CTECArray(int size)
 	this->head = nullptr;
 
 	//Defensive
-	if (size <= 0)
+	assert(size > 0);
+	for (int index = 0; index <= size; index++)
 	{
-		cerr << "That is not a valid number ya idjit" << endl;
-		return;
-	}
-
-	for (int index = 0; index < size; index++)
-	{
-
 		if (head != nullptr)
 		{
 			//Regular nodes are being made
-			ArrayNode<Type> nextNode;
-			nextNode.setNext(head);
-			this->head = &nextNode;
+			ArrayNode<Type> * nextNode = new ArrayNode<Type>();
+			nextNode->setNext(head);
+			this->head = nextNode;
 		}
 		else
 		{
 			//the first ArrayNode is made;
-			ArrayNode<Type> firstNode;
-			this->head = &firstNode;
+			ArrayNode<Type> * firstNode = new ArrayNode<Type>();
+			this->head = firstNode;
 		}
 	}
 }
@@ -56,14 +51,11 @@ int CTECArray<Type>::getSize()
  * Sets the value to a specific position. If/else tests if input is out of bounds.
  */
 template<class Type>
-void CTECArray<Type>::set(int position, Type value)
+void CTECArray<Type>::set(int position, const Type& value)
 {
-	if (position >= size || position < 0)
-	{
-		cerr << "position value is out of bounds :(" << endl;
-	}
-	else
-	{
+		//I am out of bounds and need to do something about it.
+		assert(position < size && position >= 0);
+		//I am in bounds so I am inclusive
 		ArrayNode<Type> * current = head;
 		for (int spot = 0; spot <= position; spot++)
 		{
@@ -73,25 +65,24 @@ void CTECArray<Type>::set(int position, Type value)
 			}
 			else
 			{
-				current->setValue();
+				current->setValue(value);
 			}
 		}
-	}
+
 }
 
 /**
  * Gets the value at a specific position. If/else tests if position is out of bounds.
  */
 template<class Type>
-Type* CTECArray<Type>::get(int position)
+Type CTECArray<Type>::get(int position)
 {
-	if (position >= size || position < 0)
-	{
-		cerr << "position value is out of bounds :(" << endl;
-		return nullptr;
-	}
-	else
-	{
+	/*
+	 * Bnds check for size and negative
+	 * The call to assert checks that the postion lies within
+	 */
+	assert(position < size && position >= 0);
+
 		ArrayNode<Type> * current = head;
 		for(int spot = 0; spot <= position; spot++)
 		{
@@ -104,7 +95,7 @@ Type* CTECArray<Type>::get(int position)
 				return current->getValue();
 			}
 		}
-	}
+
 }
 
 /**
