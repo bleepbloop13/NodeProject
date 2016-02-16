@@ -22,6 +22,8 @@ NodeController::~NodeController()
 
 void NodeController::start()
 {
+	arrayTimer.startTimer();
+
 	for(int index = 0; index < notHipsterWorld->getSize(); index++)
 	{
 		notHipsterWorld->set(index, (index * 13));
@@ -31,4 +33,7 @@ void NodeController::start()
 	{
 		cout << "The contents of the notHipsterWorld array node " << index << " are: " << notHipsterWorld->get(index) << endl;
 	}
+
+	arrayTimer.stopTimer();
+	arrayTimer.displayTimerInformation();
 }
