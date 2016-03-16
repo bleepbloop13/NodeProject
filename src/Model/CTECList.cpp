@@ -20,13 +20,52 @@ CTECList<Type>::CTECList()
 template<class Type>
 CTECList<Type>::~CTECList()
 {
+	ArrayNode<Type> * current = head;
 
+	for(int deleteCount = 0; deleteCount < size; deleteCount++)
+	{
+		ArrayNode<Type> * temp = current;
+		current = current->getNext();
+		head = current;
+		delete temp;
+	}
+
+	delete head;
+	head = nullptr;
+	end = nullptr;
+	size = 0;
 }
 
 template<class Type>
 int CTECList<Type>::getSize()
 {
 	return size;
+}
+
+template<class Type>
+Type CTECList<Type>::getFront()
+{
+	return head->value;
+}
+
+template<class Type>
+Type CTECList<Type>::getEnd()
+{
+	return end->value;
+}
+
+template<class Type>
+Type CTECList<Type>::getFromIndex(int index)
+{
+	ArrayNode<Type> * current = head;
+	for(int i = 1; i <= index; i++)
+	{
+		if(i == index)
+		{
+			return current->value;
+		}
+		current = current->getNext();
+	}
 }
 
 template<class Type>
@@ -59,14 +98,13 @@ void CTECList<Type>::addToFront(const Type& value)
 
 	newFirst->setNext(current);
 	head = newFirst;
-	calculateSize();
 }
 
 template<class Type>
 void CTECList<Type>::addAtIndex(int index, const Type& value)
 {
-	assert(size > 0);
-	assert(index > 0);
+	assert(size >= 0);
+	assert(index >= 0);
 	assert(index < size);
 
 	ArrayNode<Type> * currentSpot = head;
@@ -92,13 +130,13 @@ void CTECList<Type>::addAtIndex(int index, const Type& value)
 
 		currentSpot = currentSpot->getNext();
 	}
-	calculateSize();
 }
 
 template<class Type>
 void CTECList<Type>::addToEnd(const Type& value)
 {
-	assert(size > 0);
+	assert(size >= 0);
+
 
 	ArrayNode<Type> * newEnd = new ArrayNode<Type>(value);
 	ArrayNode<Type> * currentSpot = end;
@@ -106,7 +144,6 @@ void CTECList<Type>::addToEnd(const Type& value)
 
 	currentSpot->setNext(newNext);
 	newNext->setNext(nullptr);
-	calculateSize();
 }
 
 template<class Type>
@@ -116,7 +153,6 @@ Type CTECList<Type>::removeFromFront()
 	ArrayNode<Type> * newHead = new ArrayNode<Type>();
 	newHead = this->head->getNext();
 	thingToRemove = this->head->getValue();
-	calculateSize();
 	return thingToRemove;
 }
 
@@ -149,7 +185,7 @@ Type CTECList<Type>::removeFromEnd()
 		delete end;
 		current = end;
 	}
-	calculateSize();
+
 	return returnValue;
 }
 
@@ -178,7 +214,6 @@ Type CTECList<Type>::removeFromIndex(int index)
 		current = current->getNext();
 	}
 	previousSpot->setNext(newNext);
-	calculateSize();
 	return thingToRemove;
 }
 

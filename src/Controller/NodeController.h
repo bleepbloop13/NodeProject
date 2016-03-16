@@ -12,6 +12,7 @@
 #include "../Model/ArrayNode.cpp"
 #include "../Model/ArrayNode.h"
 #include "../Model/CTECArray.cpp"
+#include "../Model/CTECList.cpp"
 #include "../Model/Timer.h"
 #include <string>
 using namespace std;
@@ -20,7 +21,9 @@ class NodeController
 {
 private:
 	CTECArray<int> * notHipsterWorld;
+	CTECList<int> * testList;
 	Timer arrayTimer;
+	void testLists();
 public:
 	NodeController();
 	virtual ~NodeController();
